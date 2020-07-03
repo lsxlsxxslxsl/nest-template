@@ -2,6 +2,7 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as helmet from 'helmet';
 import { join } from 'path';
 // import { FlubErrorHandler } from 'nestjs-flub';
 import { AppModule } from './app.module';
@@ -10,9 +11,12 @@ import config from './config/env';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     logger: process.env.NODE_ENV === 'development' ? new Logger() : false,
+    cors: true
   });
   const rootDir = join(__dirname, '..');
 
+  // http安全
+  app.use(helmet());
   // 开启CORS
   app.enableCors();
   // 全局路由前缀

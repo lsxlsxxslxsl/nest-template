@@ -1,4 +1,4 @@
-import { Controller, Headers, HttpCode, Post } from '@nestjs/common';
+import { Controller, Get, Headers, HttpCode, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UpgradeService } from './upgrade.service';
 
@@ -12,5 +12,16 @@ export class UpgradeController {
   @HttpCode(200)
   getChannelList(@Headers('cookie') cookie: string) {
     return this.upgradeService.getChannelList(cookie);
+  }
+
+  @Get('list')
+  index() {
+    return {
+      code: 200,
+      msg: '',
+      data: {
+        key: '123123'
+      }
+    }
   }
 }
