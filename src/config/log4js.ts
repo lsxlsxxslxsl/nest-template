@@ -7,7 +7,7 @@ const log4jsConfig = {
       type: 'console', // 会打印到控制台
     },
     access: {
-      type: 'DateFile', // 会写入文件，并按照日期分类
+      type: 'dateFile', // 会写入文件，并按照日期分类
       filename: `${baseLogPath}/access/access.log`, // 日志文件名，会命名为：access.20200320.log
       alwaysIncludePattern: true,
       pattern: 'yyyy-MM-dd',
@@ -17,7 +17,7 @@ const log4jsConfig = {
       keepFileExt: true, // 是否保留文件后缀
     },
     warn: {
-      type: 'DateFile',
+      type: 'dateFile',
       filename: `${baseLogPath}/warn/warn.log`,
       alwaysIncludePattern: true,
       layout: {
@@ -34,7 +34,7 @@ const log4jsConfig = {
       keepFileExt: true,
     },
     errorFile: {
-      type: 'DateFile',
+      type: 'dateFile',
       filename: `${baseLogPath}/errors/error.log`,
       alwaysIncludePattern: true,
       layout: {
