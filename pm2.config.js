@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'upgrade',
-      script: './main.js',
+      script: './dist/main.js',
       cwd: './', // 当前工作路径
       instances: 'max',
       exec_mode: 'cluster',
@@ -11,43 +11,48 @@ module.exports = {
       node_args: '--harmony', // node的启动模式
       env: {
         PORT: 8001,
-        NODE_ENV: 'test',
+        NODE_ENV: 'test'
       },
       env_production: {
         PORT: 8002,
-        NODE_ENV: 'production',
+        NODE_ENV: 'production'
       },
       out_file: './logs/output.log', // 普通日志路径
       error_file: './logs/error.log', // 错误日志路径
       merge_logs: true,
-      log_date_format: 'YYYY-MM-DD HH:mm z',
-    },
+      log_date_format: 'YYYY-MM-DD HH:mm z'
+    }
   ],
   // 远程部署
   deploy: {
     production: {
       // 需要配置免密登录
       user: 'root', // 服务器用户名
-      host: 'xxx.xxx.xxx.xxx', // 服务器地址
-      port: 22, // ssh端口
+      host: '39.104.124.220', // 服务器地址
+      port: 39999, // ssh端口
+      ssh_options: StrictHostKeyChecking=no, // SSH 公钥检查
       ref: 'origin/master', // 仓库名称
-      repo: 'git@github.com:xxx/xxx.git', // Github上的仓库地址
+      repo: 'git@github.com:lsxlsxxslxsl/nest-template.git', // Github上的仓库地址
       path: '/var/server/production', // 应用部署到服务器的路径
       'pre-deploy': 'git fetch --all', //部署前执行
-      'post-deploy': 'npm install && pm2 reload pm2.config.js --env production', // 部署后执行
+      'post-deploy': 'npm install && npm run build && pm2 reload pm2.config.js --env production', // 部署后执行
+      env: {
+        NODE_ENV: 'production'
+      }
     },
     test: {
       user: 'root',
-      host: 'xxx.xxx.xxx.xxx',
-      port: 22, // ssh端口
+      host: '39.104.124.220',
+      port: 39999, // ssh端口
+      ssh_options: StrictHostKeyChecking=no, // SSH 公钥检查
       ref: 'origin/master',
-      repo: 'git@github.com:xxx/xxx..git',
+      repo: 'git@github.com:lsxlsxxslxsl/nest-template.git',
       path: '/var/server/test',
       'pre-deploy': 'git fetch --all',
-      'post-deploy': 'npm install && pm2 reload pm2.config.js --env test',
+      'post-deploy': 'npm install && npm run build && pm2 reload pm2.config.js --env test',
       env: {
-        NODE_ENV: 'test',
-      },
-    },
-  },
+        NODE_ENV: 'test'
+      }
+    }
+  }
 };
