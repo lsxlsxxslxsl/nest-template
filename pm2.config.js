@@ -30,12 +30,12 @@ module.exports = {
       user: 'root', // 服务器用户名
       host: '39.104.124.220', // 服务器地址
       port: 39999, // ssh端口
-      ssh_options: StrictHostKeyChecking=no, // SSH 公钥检查
+      ssh_options: 'StrictHostKeyChecking=no', // SSH 公钥检查
       ref: 'origin/master', // 仓库名称
       repo: 'git@github.com:lsxlsxxslxsl/nest-template.git', // Github上的仓库地址
       path: '/var/server/production', // 应用部署到服务器的路径
       'pre-deploy': 'git fetch --all', //部署前执行
-      'post-deploy': 'npm install && npm run build && pm2 reload pm2.config.js --env production', // 部署后执行
+      'post-deploy': 'yarn install && yarn run build && pm2 reload pm2.config.js --env production', // 部署后执行
       env: {
         NODE_ENV: 'production'
       }
@@ -44,12 +44,12 @@ module.exports = {
       user: 'root',
       host: '39.104.124.220',
       port: 39999, // ssh端口
-      ssh_options: StrictHostKeyChecking=no, // SSH 公钥检查
+      ssh_options: 'StrictHostKeyChecking=no', // SSH 公钥检查
       ref: 'origin/master',
       repo: 'git@github.com:lsxlsxxslxsl/nest-template.git',
       path: '/var/server/test',
       'pre-deploy': 'git fetch --all',
-      'post-deploy': 'npm install && npm run build && pm2 reload pm2.config.js --env test',
+      'post-deploy': 'yarn install && yarn run build && pm2 reload pm2.config.js --env test',
       env: {
         NODE_ENV: 'test'
       }
