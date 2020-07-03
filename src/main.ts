@@ -2,14 +2,10 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
 import { join } from 'path';
 // import { FlubErrorHandler } from 'nestjs-flub';
 import { AppModule } from './app.module';
-const config = dotenv.parse(
-  fs.readFileSync(`./env/.${process.env.NODE_ENV}.env`),
-);
+import config from './config/env';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -47,7 +43,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-doc', app, document);
 
-  await app.listen(3000);
+  await app.listen(config.PORT);
   console.log(`Server running at: ${config.HOST}:${config.PORT}`);
 }
 bootstrap();

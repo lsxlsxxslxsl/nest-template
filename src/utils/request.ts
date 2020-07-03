@@ -1,9 +1,6 @@
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
 import fetch, { RequestInit } from 'node-fetch';
-const baseUrl: string = dotenv.parse(
-  fs.readFileSync(`./env/.${process.env.NODE_ENV}.env`),
-).BASE_URL;
+import config from '../config/env';
+const baseUrl: string = config.BASE_URL;
 
 interface IRequestResult {
   code: number;

@@ -69,6 +69,7 @@ const log4jsConfig = {
   },
   pm2: true, // 使用 pm2 来管理项目时，打开
   pm2InstanceVar: 'INSTANCE_ID', // 会根据 pm2 分配的 id 进行区分，以免各进程在写日志时造成冲突
+  // disableClustering: true
 };
 
 export default log4jsConfig;
