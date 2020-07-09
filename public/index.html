@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="/assets/style/global.css">
-</head>
-<body>
-  pc站点1111
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/style/global.css" />
+  </head>
+  <body>
+    pc站点1111
+  </body>
+  <script>
+    async function request() {
+      const res = await fetch('/api/upgrade/list', {
+        method: 'GET'
+      });
+      const json = await res.json();
+      console.log('请求数据', json);
+    }
+    request();
+  </script>
 </html>
